@@ -1,0 +1,32 @@
+#!/usr/bin/ruby -w
+
+require "net/https"
+require "uri"
+require "json"
+require "ostruct"
+require "erb"
+
+
+def get_nearest_server
+  uri = URI.parse("https://www.cine.io/api/1/-/nearest-server")
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+  request = Net::HTTP::Get.new(uri.request_uri)
+
+  response = http.request(request)
+  JSON.parse(response.body)
+end
+
+unless ARGV.length == 2
+  $stderr.puts "Usage: #{$0} INPUTFILE OUTPUTFILE"
+  exit(1)
+end
+
+infilename = ARGV[0]
+outfilename = ARGV[1]
+outfile = File.open(outfilename, 'w')
+
+vars = get_nearest_server
+outfile.puts ERB.new(File.read(infilename)).result(OpenStruct.new(vars).instance_eval { binding })

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# update our nginx.conf based on our geo-ip
+/service/bin/updateconf /service/config/nginx.conf.erb /usr/local/etc/nginx.conf
+
+# start
+/usr/local/sbin/nginx
+
+# tail the logs
+#tail -f /var/log/ffmpeg.log
