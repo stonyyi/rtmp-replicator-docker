@@ -1,4 +1,4 @@
-# rtmp-flv-record-docker
+# rtmp-replicator-docker
 
 cine.io [Docker](https://docker.com/) container that receives incoming RTMP FLV streams and saves them as FLV files on a shared volume.
 
