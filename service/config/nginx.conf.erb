@@ -20,7 +20,7 @@ rtmp {
     application live {
       live on;
 
-      push <%= host %> app=<%= app %> passArgs=1;   # RTMP CDN
+      push <%= rtmpCDNHost %> app=<%= rtmpCDNApp %> passArgs=1;   # RTMP CDN
       push rtmp://vod-scribe/live passArgs=1;       # VOD scribe
       # push <%= host %> app=<%= app %> passArgs=1; # HLS chopper
     }
