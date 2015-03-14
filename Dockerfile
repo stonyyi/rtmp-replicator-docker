@@ -14,4 +14,7 @@ WORKDIR /service
 CMD ["/service/bin/run"]
 
 # configuration
+#rtmp
 EXPOSE 1935
+#stats
+# EXPOSE 80

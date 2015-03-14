@@ -1,7 +1,9 @@
 daemon off;
 
 user root;
-worker_processes 4;
+#important for stats and playing,
+#otherwise different workers have different stats
+worker_processes 1;
 pid /var/run/nginx.pid;
 
 events {
@@ -9,6 +11,21 @@ events {
 }
 
 error_log /dev/stdout info; # debug;
+
+# For the stats
+# https://github.com/arut/nginx-rtmp-module/wiki/Getting-started-with-nginx-rtmp
+http {
+  server {
+    listen       80;
+    location /stat {
+      rtmp_stat all;
+      rtmp_stat_stylesheet stat.xsl;
+    }
+    location /stat.xsl {
+      root /service/config;
+    }
+  }
+}
 
 rtmp {
   server {
