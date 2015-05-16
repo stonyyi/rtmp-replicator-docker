@@ -16,7 +16,7 @@ parseNginxRtmpXML = require('./lib/parseNginxRtmpXML')
 RTMP_REPLICATOR = 'localhost'
 
 MINUTES = 60000 #milliseconds
-TIME_BETWEEN_CHECKS = 0.1 * MINUTES
+TIME_BETWEEN_CHECKS = 10 * MINUTES
 
 getRTMPServerStats = (server, callback)->
   request.get "http://#{server}/stat", (err, response, body)->
