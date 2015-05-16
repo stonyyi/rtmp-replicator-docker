@@ -1,0 +1,26 @@
+{
+  "author": "BML Ventures Team",
+  "name": "cine.io",
+  "domains": [
+    "cine.io"
+  ],
+  "version": "0.0.1",
+  "description": "cine.io web site",
+  "scripts": {},
+  "repository": "https://github.com/cine-io/rtmp-replicator-docker",
+  "dependencies": {
+    "async": "^0.9.0",
+    "cli-color": "^1.0.0",
+    "coffee-script": "^1.9.2",
+    "debug": "^2.2.0",
+    "request": "^2.55.0",
+    "underscore": "^1.8.3",
+    "xml2js": "^0.4.8"
+  },
+  "devDependencies": {},
+  "license": "Copyrighted / All Rights Reserved",
+  "engines": {
+    "node": "0.10.33"
+  },
+  "private": true
+}

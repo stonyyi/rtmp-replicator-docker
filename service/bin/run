@@ -4,7 +4,9 @@
 /service/bin/updateconf /service/config/nginx.conf.erb /usr/local/etc/nginx.conf
 
 # start
-/usr/local/sbin/nginx
+/usr/local/sbin/nginx &
+
+/service/nginx_reloader/node_modules/coffee-script/bin/coffee /service/nginx_reloader/server.coffee
 
 # tail the logs
 #tail -f /var/log/ffmpeg.log

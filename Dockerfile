@@ -8,6 +8,10 @@ RUN touch /var/log/ffmpeg.log
 # copy our service
 COPY service /service
 
+# install npm depdendencies
+WORKDIR /service/nginx_reloader
+RUN npm install --production
+
 WORKDIR /service
 
 # start nginx

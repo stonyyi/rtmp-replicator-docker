@@ -12,6 +12,8 @@ Icon
 .floo
 .flooignore
 
+node_modules
+
 # other
 tmp
 ignored/
