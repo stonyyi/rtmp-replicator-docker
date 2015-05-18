@@ -3,10 +3,20 @@
 # update our nginx.conf based on our geo-ip
 /service/bin/updateconf /service/config/nginx.conf.erb /usr/local/etc/nginx.conf
 
-# start
+# start nginx
 /usr/local/sbin/nginx &
 
-/service/nginx_reloader/node_modules/coffee-script/bin/coffee /service/nginx_reloader/server.coffee
-
-# tail the logs
-#tail -f /var/log/ffmpeg.log
+# keep restarting nginx to avoid EdgeCast disconnects if there are no streams
+# running
+function restart {
+  /usr/local/sbin/nginx -s stop
+  /usr/local/sbin/nginx &
+}
+test "$IDLE_RESTART_MINUTES" -gt 0 || IDLE_RESTART_MINUTES=10
+TIME_BETWEEN_CHECKS=$((60*$IDLE_RESTART_MINUTES))
+echo "checking every $TIME_BETWEEN_CHECKS seconds for possible restart"
+while [ 1 ]; do
+  /service/nginx_reloader/node_modules/coffee-script/bin/coffee /service/nginx_reloader/is-restart-necessary.coffee
+  test $? -ne 0 && restart
+  sleep $TIME_BETWEEN_CHECKS
+done
